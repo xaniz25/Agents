@@ -97,35 +97,47 @@ public class Controller {
     }
 
     @FXML
-    void onActionBtnEdit(ActionEvent event) throws SQLException {
-
+    private void onActionBtnEdit(ActionEvent event) throws SQLException {
+        btnSave.setDisable(false);
+        tfAgtFirstName.setEditable(true);
+        tfAgtLastName.setEditable(true);
+        tfAgtPhone.setEditable(true);
+        tfAgtEmail.setEditable(true);
+        tfAgtPosition.setEditable(true);
+        tfAgencyId.setEditable(true);
     }
 
     @FXML
-    void onActionBtnSave(ActionEvent event) throws SQLException {
+    private void onActionBtnSave(ActionEvent event) throws SQLException {
         Connection conn = helper.createConnection();
-        String sql = "UPDATE `agents` SET `AgtFirstName`=? `AgtLastName`=? `AgtBusPhone`=? `AgtEmail`=? `AgtPosition`=? `AgencyId`=? WHERE `AgentId`= ?";
+        String sql = "UPDATE `agents` SET `AgtFirstName`=?, `AgtLastName`=?, `AgtBusPhone`=?, `AgtEmail`=?, `AgtPosition`=?, `AgencyId`=? WHERE `AgentId`= ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, tfAgtFirstName.getText());
         stmt.setString(2, tfAgtLastName.getText());
         stmt.setString(3, tfAgtPhone.getText());
         stmt.setString(4, tfAgtEmail.getText());
         stmt.setString(5, tfAgtPosition.getText());
-        stmt.setInt(8, Integer.parseInt(tfAgencyId.getText()));
+        stmt.setInt(6, Integer.parseInt(tfAgencyId.getText()));
         stmt.setInt(7, Integer.parseInt(tfAgtId.getText()));
         int rows = stmt.executeUpdate();
         conn.close();
         if (rows == 0)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Update failed, contact tech support", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Update failed.", ButtonType.OK);
             alert.show();
         }
         else
         {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Update sucessful", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Update successful!", ButtonType.OK);
             alert.show();
             loadCombo();
         }
-
+        btnSave.setDisable(true);
+        tfAgtFirstName.setEditable(false);
+        tfAgtLastName.setEditable(false);
+        tfAgtPhone.setEditable(false);
+        tfAgtEmail.setEditable(false);
+        tfAgtPosition.setEditable(false);
+        tfAgencyId.setEditable(false);
     }
 }
