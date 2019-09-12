@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_17_bin1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_17_bin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_17_bin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agents.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Agents.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Agents/sample/Agent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Agents/sample/Agent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Agents/sample/Controller$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Agents/sample/Controller$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Agents/sample/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Agents/sample/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Agents/sample/DBHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Agents/sample/DBHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Agents/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Agents/sample/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Agents/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Agents/sample/sample.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/DBHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/DBHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/sample.fxml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,10 +98,11 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mysql-connector-java-5.1.17-bin.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Resources/mysql-connector-java-5.1.17-bin.jar!/" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -92,9 +110,14 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.25172412" />
     <property name="recentsLimit" value="5" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="sample" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -194,6 +217,7 @@
       <workItem from="1359379250712" duration="1302000" />
       <workItem from="1568244948032" duration="4475000" />
       <workItem from="1568250453307" duration="588000" />
+      <workItem from="1568299904297" duration="11698000" />
     </task>
     <servers />
   </component>
@@ -205,7 +229,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
