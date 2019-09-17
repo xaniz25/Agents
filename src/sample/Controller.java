@@ -5,7 +5,6 @@ package sample;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -34,6 +33,9 @@ public class Controller {
 
     @FXML
     private TextField tfAgtFirstName;
+
+    @FXML
+    private TextField tfAgtMidInitial;
 
     @FXML
     private TextField tfAgtLastName;
@@ -65,7 +67,7 @@ public class Controller {
         ArrayList<Agent> agtArrayList = new ArrayList<>();
         while (rs.next()){
         //read each row and keep making agents. integers are agent table's column indexes
-            agtArrayList.add(new Agent(rs.getInt(1), rs.getString(2), rs.getString(4),
+            agtArrayList.add(new Agent(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
                     rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
         }
         agents = FXCollections.observableArrayList(agtArrayList);
@@ -74,11 +76,13 @@ public class Controller {
     }
 
     @FXML
+    //when main form loads
     void initialize() throws SQLException {
         //checks if each FXML elements are injected
         assert cbAgents != null : "fx:id=\"cbAgents\" was not injected: check your FXML file 'sample.fxml'.";
         assert tfAgtId != null : "fx:id=\"tfAgentId\" was not injected: check your FXML file 'sample.fxml'.";
         assert tfAgtFirstName != null : "fx:id=\"tfAgtFirstName\" was not injected: check your FXML file 'sample.fxml'.";
+        assert tfAgtMidInitial != null : "fx:id=\"tfAgtMidInitial\" was not injected: check your FXML file 'sample.fxml'.";
         assert tfAgtLastName != null : "fx:id=\"tfAgtLastName\" was not injected: check your FXML file 'sample.fxml'.";
         assert tfAgtPhone != null : "fx:id=\"tfAgtPhone\" was not injected: check your FXML file 'sample.fxml'.";
         assert tfAgtEmail != null : "fx:id=\"tfAgtEmail\" was not injected: check your FXML file 'sample.fxml'.";
@@ -95,6 +99,7 @@ public class Controller {
                 if (newValue != null) {
                     tfAgtId.setText(newValue.getAgtId()+"");
                     tfAgtFirstName.setText(newValue.getAgtFirstName());
+                    tfAgtMidInitial.setText(newValue.getAgtMidInitial());
                     tfAgtLastName.setText(newValue.getAgtLastName());
                     tfAgtPhone.setText(newValue.getAgtPhone());
                     tfAgtEmail.setText(newValue.getAgtEmail());
@@ -106,25 +111,19 @@ public class Controller {
 
         //all text fields are uneditable on default/on load (set in fxml) until Edit button is clicked
         //changing opacity so it's more obvious to users that the fields are not editable
-        btnSave.setStyle("-fx-opacity: 0.5");
-        tfAgtId.setStyle("-fx-opacity: 0.5");
-        tfAgtFirstName.setStyle("-fx-opacity: 0.5");
-        tfAgtLastName.setStyle("-fx-opacity: 0.5");
-        tfAgtPhone.setStyle("-fx-opacity: 0.5");
-        tfAgtEmail.setStyle("-fx-opacity: 0.5");
-        tfAgtPosition.setStyle("-fx-opacity: 0.5");
-        tfAgencyId.setStyle("-fx-opacity: 0.5");
+        lessOpaque();
     }
 
     @FXML
     private void onActionBtnEdit(ActionEvent event) throws SQLException {
     //when Edit button is clicked, enable editing on textfield and Save button, and disable Edit button
     //AgentID is a PK, it's auto-incremented in the table and we want to keep the same ID for an agent
-    //so AgentID is kept as uneditable
+    //so AgentID is kept as uneditable, and faded/not opaque
 
         btnEdit.setDisable(true);
         btnSave.setDisable(false);
         tfAgtFirstName.setEditable(true);
+        tfAgtMidInitial.setEditable(true);
         tfAgtLastName.setEditable(true);
         tfAgtPhone.setEditable(true);
         tfAgtEmail.setEditable(true);
@@ -134,6 +133,7 @@ public class Controller {
         btnEdit.setStyle("-fx-opacity: 0.5");
         btnSave.setStyle("-fx-opacity: 1");
         tfAgtFirstName.setStyle("-fx-opacity: 1");
+        tfAgtMidInitial.setStyle("-fx-opacity: 1");
         tfAgtLastName.setStyle("-fx-opacity: 1");
         tfAgtPhone.setStyle("-fx-opacity: 1");
         tfAgtEmail.setStyle("-fx-opacity: 1");
@@ -146,24 +146,25 @@ public class Controller {
     //and disable text fields and save button, and enable edit button
     private void onActionBtnSave(ActionEvent event) throws SQLException {
         Connection conn = helper.createConnection();
-        String sql = "UPDATE `agents` SET `AgtFirstName`=?, `AgtLastName`=?, `AgtBusPhone`=?, `AgtEmail`=?, `AgtPosition`=?, `AgencyId`=? WHERE `AgentId`= ?";
+        String sql = "UPDATE `agents` SET `AgtFirstName`=?, `AgtMiddleInitial`=?, `AgtLastName`=?, `AgtBusPhone`=?, `AgtEmail`=?, `AgtPosition`=?, `AgencyId`=? WHERE `AgentId`= ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         //assigning ? parameters to corresponding text fields
         stmt.setString(1, tfAgtFirstName.getText());
-        stmt.setString(2, tfAgtLastName.getText());
-        stmt.setString(3, tfAgtPhone.getText());
-        stmt.setString(4, tfAgtEmail.getText());
-        stmt.setString(5, tfAgtPosition.getText());
+        stmt.setString(2, tfAgtMidInitial.getText());
+        stmt.setString(3, tfAgtLastName.getText());
+        stmt.setString(4, tfAgtPhone.getText());
+        stmt.setString(5, tfAgtEmail.getText());
+        stmt.setString(6, tfAgtPosition.getText());
         //validate if input for Agency Id is int
-        if(!tfAgencyId.getText().matches("[0-9]")) {
+        if(!tfAgencyId.getText().matches("[0-9]*")) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Agency Id must be an integer!", ButtonType.OK);
             alert.setHeaderText(null);
             alert.show();
         }
         else {
-            stmt.setInt(6, Integer.parseInt(tfAgencyId.getText()));
+            stmt.setInt(7, Integer.parseInt(tfAgencyId.getText()));
         }
-        stmt.setInt(7, Integer.parseInt(tfAgtId.getText()));
+        stmt.setInt(8, Integer.parseInt(tfAgtId.getText()));
         int rows = stmt.executeUpdate();
         conn.close();
         if (rows == 0){ //if no rows were updated, show error
@@ -182,15 +183,22 @@ public class Controller {
         btnEdit.setDisable(false);
         btnSave.setDisable(true);
         tfAgtFirstName.setEditable(false);
+        tfAgtMidInitial.setEditable(false);
         tfAgtLastName.setEditable(false);
         tfAgtPhone.setEditable(false);
         tfAgtEmail.setEditable(false);
         tfAgtPosition.setEditable(false);
         tfAgencyId.setEditable(false);
 
+        lessOpaque();
+    }
+
+    private void lessOpaque(){
         btnEdit.setStyle("-fx-opacity: 1");
         btnSave.setStyle("-fx-opacity: 0.5");
+        tfAgtId.setStyle("-fx-opacity: 0.5");
         tfAgtFirstName.setStyle("-fx-opacity: 0.5");
+        tfAgtMidInitial.setStyle("-fx-opacity: 0.5");
         tfAgtLastName.setStyle("-fx-opacity: 0.5");
         tfAgtPhone.setStyle("-fx-opacity: 0.5");
         tfAgtEmail.setStyle("-fx-opacity: 0.5");

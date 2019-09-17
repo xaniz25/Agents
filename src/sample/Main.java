@@ -15,7 +15,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         //changed title and scene size
         primaryStage.setTitle("Agent Editor");
-        primaryStage.setScene(new Scene(root, 400, 525));
+        primaryStage.setScene(new Scene(root, 400, 600));
         primaryStage.show();
     }
     public static void main(String[] args) {
